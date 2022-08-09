@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="covid-data.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $.get("https://data.covid19india.org/v4/min/data.min.json").then((data) => {
+        console.log(data)
+        let indiaTotal = 0
+        let indiaDeaths = 0
+        let indiaRecovered = 0
+        let indiaVacci1 = 0
+        let indiaVacci2 = 0
+        for (let i of Object.keys(data)) {
+          indiaTotal += data[i]["total"]["confirmed"]
+          indiaDeaths += data[i]["total"]["deceased"]
+          indiaRecovered += data[i]["total"]["recovered"]
+          indiaVacci1 += data[i]["total"]["vaccinated1"]
+          indiaVacci2 += data[i]["total"]["vaccinated2"]
+          
+        }
+        console.log(indiaTotal)
+        $("#total").append(`${indiaTotal}`)
+        $("#deaths").append(`${indiaDeaths}`)
+        $("#recovered").append(`${indiaRecovered}`)
+        $("#vaccinated1").append(`${indiaVacci1}`)
+        $("#vaccinated2").append(`${indiaVacci2}`)
+      })
+    });
+  </script>
+  <div class="data">
+<form action="covid states data.html"><button>View by States</button></form><h1>Covid Data</h1><form action="covid_district_data.html"><button class="bt">view by Districts</button></form></div>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+    <h3 class="total">Total cases</h3>
+    <p id="total"> <p>
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+    <h3 class="deaths">Deceased</h3>
+    <p id="deaths"></p>
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <h3 class="recovered">Recovered</h3>
+      <p id="recovered">
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+    <h3 class="vaccinated1">First Dose</h3>
+    <p id="vaccinated1"></p>
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+  <div class="column">
+        <div class="card">
+        <h3 class="vaccinated1">Second Dose</h3>
+        <p id="vaccinated2"></p>
+        <!-- <p>Some text</p> -->
+        </div>
+    </div>
+</div>
+</body>
+<img src="https://media.springernature.com/lw725/springer-cms/rest/v1/content/18512388/data/v2" alt="Girl in a jacket" style="width:1400px;height:600px;">
+
+</html>
+
